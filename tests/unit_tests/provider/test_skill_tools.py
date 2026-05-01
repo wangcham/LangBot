@@ -386,7 +386,7 @@ class TestSkillAuthoringToolLoader:
         )
 
         ap = _make_ap()
-        ap.box_service = SimpleNamespace(default_host_workspace='/tmp/langbot-workspace')
+        ap.box_service = SimpleNamespace(default_workspace='/tmp/langbot-workspace')
         ap.skill_service = SimpleNamespace(
             scan_directory=Mock(
                 return_value={
@@ -405,7 +405,7 @@ class TestSkillAuthoringToolLoader:
         await loader.initialize()
 
         with tempfile.TemporaryDirectory() as tmpdir:
-            ap.box_service.default_host_workspace = tmpdir
+            ap.box_service.default_workspace = tmpdir
             repo_dir = os.path.join(tmpdir, 'repos', 'cloned-skill')
             os.makedirs(repo_dir)
 
@@ -436,7 +436,7 @@ class TestSkillAuthoringToolLoader:
         )
 
         ap = _make_ap()
-        ap.box_service = SimpleNamespace(default_host_workspace='/tmp/langbot-workspace')
+        ap.box_service = SimpleNamespace(default_workspace='/tmp/langbot-workspace')
         ap.skill_service = SimpleNamespace(
             scan_directory=Mock(),
             create_skill=AsyncMock(),
@@ -492,7 +492,7 @@ class TestNativeToolLoaderSkillPaths:
                 f.write('demo instructions')
 
             ap = _make_ap()
-            ap.box_service = SimpleNamespace(available=True, default_host_workspace=tmpdir)
+            ap.box_service = SimpleNamespace(available=True, default_workspace=tmpdir)
             ap.skill_mgr = SimpleNamespace(skills={'demo': _make_skill_data(name='demo', package_root=tmpdir)})
             loader = NativeToolLoader(ap)
 
@@ -513,7 +513,7 @@ class TestNativeToolLoaderSkillPaths:
             ap = _make_ap()
             ap.box_service = SimpleNamespace(
                 available=True,
-                default_host_workspace=tmpdir,
+                default_workspace=tmpdir,
                 execute_tool=AsyncMock(return_value={'ok': True}),
             )
             ap.skill_mgr = SimpleNamespace(refresh_skill_from_disk=Mock())
@@ -551,7 +551,7 @@ class TestNativeToolLoaderSkillPaths:
 
         with tempfile.TemporaryDirectory() as tmpdir:
             ap = _make_ap()
-            ap.box_service = SimpleNamespace(available=True, default_host_workspace=tmpdir)
+            ap.box_service = SimpleNamespace(available=True, default_workspace=tmpdir)
             ap.skill_mgr = SimpleNamespace(skills={'demo': _make_skill_data(name='demo', package_root=tmpdir)})
             loader = NativeToolLoader(ap)
 

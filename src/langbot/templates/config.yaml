@@ -88,19 +88,27 @@ monitoring:
         # Cleanup check interval in hours
         check_interval_hours: 1
 box:
-    profile: 'default'
-    image: ''  # Custom sandbox container image. Leave empty to use the profile default (python:3.11-slim).
-    runtime_url: ''  # Base URL of an external Box Runtime (e.g. ws://localhost:5410). Leave empty for auto-detection (stdio locally, Docker service in containers).
-    shared_host_root: './data/box'  # For Docker deployment, use '/workspaces'
-    default_host_workspace: ''  # Defaults to '<shared_host_root>/default'
-    allowed_host_mount_roots:  # Defaults to ['<shared_host_root>'] when left empty
-        - './data/box'
-        - '/tmp'
-    # E2B cloud sandbox configuration (optional, requires e2b package)
+    # Sandbox backend driver. 'local' uses a local container runtime; 'e2b' uses the E2B cloud sandbox.
+    backend: 'local'
+    runtime:
+        # Base URL of an external Box Runtime (e.g. ws://localhost:5410).
+        # Leave empty for auto-detection (stdio locally, Docker service in containers).
+        endpoint: ''
+    # Local backend (containerized sandbox running on host or Docker)
+    local:
+        profile: 'default'
+        image: ''  # Custom container image. Empty = profile default (python:3.11-slim).
+        host_root: './data/box'  # For Docker deployment, use '/workspaces'.
+        default_workspace: ''  # Defaults to '<host_root>/default'.
+        allowed_mount_roots:  # Defaults to ['<host_root>'] when left empty.
+            - './data/box'
+            - '/tmp'
+        workspace_quota_mb: null  # Optional disk quota override (>= 0). null = profile default.
+    # E2B cloud sandbox (https://e2b.dev). Requires the e2b package on the runtime side.
     e2b:
-        api_key: ''  # E2B API key (can also be set via E2B_API_KEY env var)
-        api_url: ''  # Custom API URL for self-hosted deployments
-        default_template: ''  # Default template ID (e.g. 'base', 'python-3.11')
+        api_key: ''  # Can also be set via E2B_API_KEY env var.
+        api_url: ''  # Custom API URL for self-hosted deployments.
+        template: ''  # Default template ID (e.g. 'base', 'python-3.11').
 space:
     # Space service URL for OAuth and API
     url: 'https://space.langbot.app'

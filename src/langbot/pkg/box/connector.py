@@ -29,8 +29,9 @@ _DEFAULT_PORT = 5410
 
 _HEARTBEAT_INTERVAL_SEC = 20
 
-# Keys that are internal to LangBot and should not be passed to Box runtime
-_INTERNAL_BOX_CONFIG_KEYS = frozenset({'runtime_url'})
+# Top-level keys under ``box`` that are LangBot-internal (used only to decide
+# how to connect to the Box Runtime) and should not be forwarded to it.
+_INTERNAL_BOX_CONFIG_KEYS = frozenset({'runtime'})
 
 
 def _get_box_config(ap) -> dict:
@@ -38,6 +39,12 @@ def _get_box_config(ap) -> dict:
     instance_config = getattr(ap, 'instance_config', None)
     config_data = getattr(instance_config, 'data', {}) if instance_config is not None else {}
     return config_data.get('box', {})
+
+
+def _get_runtime_endpoint(box_cfg: dict) -> str:
+    """Return the configured Box Runtime endpoint URL (empty if unset)."""
+    runtime_cfg = box_cfg.get('runtime') or {}
+    return str(runtime_cfg.get('endpoint', '')).strip()
 
 
 def _filter_config_for_runtime(box_cfg: dict) -> dict:
@@ -53,12 +60,12 @@ def resolve_box_ws_relay_url(ap: core_app.Application) -> str:
     """
     box_cfg = _get_box_config(ap)
 
-    # Explicit runtime URL takes precedence.  The config value should be
+    # Explicit runtime endpoint takes precedence.  The config value should be
     # a bare ``ws://host:port`` (no path) – the connector appends paths
     # like ``/rpc/ws`` or ``/v1/sessions/…`` as needed.
-    runtime_url = str(box_cfg.get('runtime_url', '')).strip()
-    if runtime_url:
-        parsed = urlparse(runtime_url)
+    endpoint = _get_runtime_endpoint(box_cfg)
+    if endpoint:
+        parsed = urlparse(endpoint)
         scheme = parsed.scheme or 'ws'
         # Normalise WebSocket schemes to HTTP for the relay base URL.
         if scheme == 'ws':
@@ -80,7 +87,7 @@ class BoxRuntimeConnector(ManagedRuntimeConnector):
     """Connect to the Box runtime via action RPC.
 
     Transport decision (mirrors Plugin runtime logic):
-      1. Docker / --standalone-box / explicit runtime_url  -> WebSocket to external Box process
+      1. Docker / --standalone-box / explicit runtime.endpoint  -> WebSocket to external Box process
       2. Windows (non-Docker)                              -> subprocess + WebSocket (Windows lacks async stdio pipe)
       3. Unix / macOS                                      -> subprocess + stdio pipe
     """
@@ -120,7 +127,7 @@ class BoxRuntimeConnector(ManagedRuntimeConnector):
           - Running inside Docker (Box runtime is a separate container)
           - The ``--standalone-box`` CLI flag was passed
 
-        Note: an explicit ``runtime_url`` in config only determines *which* URL
+        Note: an explicit ``runtime.endpoint`` in config only determines *which* URL
         to connect to once WS mode is already selected — it does NOT by itself
         trigger WS mode.  This mirrors the Plugin Runtime connector behaviour.
         """
@@ -226,7 +233,7 @@ class BoxRuntimeConnector(ManagedRuntimeConnector):
         """Determine the action-RPC WebSocket URL.
 
         All endpoints share a single port; action RPC is at ``/rpc/ws``.
-        The configured ``runtime_url`` is a bare ``ws://host:port`` base;
+        The configured ``runtime.endpoint`` is a bare ``ws://host:port`` base;
         the ``/rpc/ws`` path is always appended by this method.
         """
         if self.configured_runtime_url:
@@ -343,4 +350,4 @@ class BoxRuntimeConnector(ManagedRuntimeConnector):
     # -- config helpers ------------------------------------------------------
 
     def _load_configured_runtime_url(self) -> str:
-        return str(_get_box_config(self.ap).get('runtime_url', '')).strip()
+        return _get_runtime_endpoint(_get_box_config(self.ap))

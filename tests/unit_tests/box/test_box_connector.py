@@ -15,10 +15,13 @@ def make_app(logger: Mock, runtime_url: str = ''):
         instance_config=SimpleNamespace(
             data={
                 'box': {
-                    'runtime_url': runtime_url,
-                    'profile': 'default',
-                    'allowed_host_mount_roots': [],
-                    'default_host_workspace': '',
+                    'backend': 'local',
+                    'runtime': {'endpoint': runtime_url},
+                    'local': {
+                        'profile': 'default',
+                        'allowed_mount_roots': [],
+                        'default_workspace': '',
+                    },
                 }
             }
         ),
