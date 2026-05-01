@@ -29,15 +29,36 @@ interface ModelsDialogProps {
   onOpenChange: (open: boolean) => void;
 }
 
+type ExtraArgValue = string | number | boolean | Record<string, unknown>;
+
 function convertExtraArgsToObject(
   args: ExtraArg[],
-): Record<string, string | number | boolean> {
-  const obj: Record<string, string | number | boolean> = {};
+): Record<string, ExtraArgValue> {
+  const obj: Record<string, ExtraArgValue> = {};
   args.forEach((arg) => {
-    if (arg.key.trim()) {
-      if (arg.type === 'number') obj[arg.key] = Number(arg.value);
-      else if (arg.type === 'boolean') obj[arg.key] = arg.value === 'true';
-      else obj[arg.key] = arg.value;
+    if (!arg.key.trim()) return;
+    if (arg.type === 'number') {
+      obj[arg.key] = Number(arg.value);
+    } else if (arg.type === 'boolean') {
+      obj[arg.key] = arg.value === 'true';
+    } else if (arg.type === 'object') {
+      const raw = arg.value.trim() || '{}';
+      let parsed: unknown;
+      try {
+        parsed = JSON.parse(raw);
+      } catch {
+        throw new Error(`Invalid JSON for extra parameter "${arg.key}"`);
+      }
+      if (
+        parsed === null ||
+        typeof parsed !== 'object' ||
+        Array.isArray(parsed)
+      ) {
+        throw new Error(`Extra parameter "${arg.key}" must be a JSON object`);
+      }
+      obj[arg.key] = parsed as Record<string, unknown>;
+    } else {
+      obj[arg.key] = arg.value;
     }
   });
   return obj;
@@ -147,15 +168,17 @@ export default function ModelsDialog({
       setLoadingProviders((prev) => new Set(prev).add(providerUuid));
     }
     try {
-      const [llmResp, embeddingResp] = await Promise.all([
+      const [llmResp, embeddingResp, rerankResp] = await Promise.all([
         httpClient.getProviderLLMModels(providerUuid),
         httpClient.getProviderEmbeddingModels(providerUuid),
+        httpClient.getProviderRerankModels(providerUuid),
       ]);
       setProviderModels((prev) => ({
         ...prev,
         [providerUuid]: {
           llm: llmResp.models,
           embedding: embeddingResp.models,
+          rerank: rerankResp.models,
         },
       }));
     } catch (err) {
@@ -247,8 +270,14 @@ export default function ModelsDialog({
           abilities,
           extra_args: extraArgsObj,
         } as never);
-      } else {
+      } else if (modelType === 'embedding') {
         await httpClient.createProviderEmbeddingModel({
+          name,
+          provider_uuid: providerUuid,
+          extra_args: extraArgsObj,
+        } as never);
+      } else {
+        await httpClient.createProviderRerankModel({
           name,
           provider_uuid: providerUuid,
           extra_args: extraArgsObj,
@@ -342,8 +371,14 @@ export default function ModelsDialog({
           abilities,
           extra_args: extraArgsObj,
         } as never);
-      } else {
+      } else if (modelType === 'embedding') {
         await httpClient.updateProviderEmbeddingModel(modelId, {
+          name,
+          provider_uuid: providerUuid,
+          extra_args: extraArgsObj,
+        } as never);
+      } else {
+        await httpClient.updateProviderRerankModel(modelId, {
           name,
           provider_uuid: providerUuid,
           extra_args: extraArgsObj,
@@ -367,8 +402,10 @@ export default function ModelsDialog({
     try {
       if (modelType === 'llm') {
         await httpClient.deleteProviderLLMModel(modelId);
-      } else {
+      } else if (modelType === 'embedding') {
         await httpClient.deleteProviderEmbeddingModel(modelId);
+      } else {
+        await httpClient.deleteProviderRerankModel(modelId);
       }
       toast.success(t('models.deleteSuccess'));
       loadProviderModels(providerUuid, true);
@@ -408,8 +445,16 @@ export default function ModelsDialog({
           abilities,
           extra_args: extraArgsObj,
         } as never);
-      } else {
+      } else if (modelType === 'embedding') {
         await httpClient.testEmbeddingModel('_', {
+          uuid: '',
+          name,
+          provider_uuid: '',
+          provider: providerData,
+          extra_args: extraArgsObj,
+        } as never);
+      } else {
+        await httpClient.testRerankModel('_', {
           uuid: '',
           name,
           provider_uuid: '',

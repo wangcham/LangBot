@@ -5,6 +5,8 @@ const zhHant = {
     installedPlugins: '已安裝外掛',
     pluginMarket: '外掛市場',
     mcpServers: 'MCP 伺服器',
+    pluginPages: '插件頁面',
+    pluginPagesTooltip: '由已安裝的插件提供的視覺化頁面',
     quickStart: '快速開始',
   },
   common: {
@@ -191,6 +193,9 @@ const zhHant = {
     string: '字串',
     number: '數字',
     boolean: '布林值',
+    object: '物件',
+    objectJsonPlaceholder: '{ "type": "disabled" }',
+    invalidJsonObject: '值必須是有效的 JSON 物件',
     selectModelProvider: '選擇模型供應商',
     modelProviderDescription: '請填寫供應商向您提供的模型名稱',
     modelManufacturer: '模型廠商',
@@ -260,6 +265,11 @@ const zhHant = {
     loadError: '載入資料失敗',
     chat: '對話',
     embedding: '嵌入',
+    rerank: '重排序',
+    rerankUrlTooltip:
+      '完整 URL 覆蓋重排序端點（例如：https://dashscope.aliyuncs.com/compatible-api/v1/reranks）',
+    rerankPathTooltip:
+      '附加到基礎 URL 的路徑（預設：rerank，某些服務使用 reranks）',
     modelsCount: '{{count}} 個模型',
     expandModels: '展開',
     collapseModels: '收起',
@@ -475,6 +485,7 @@ const zhHant = {
       Command: '命令',
       KnowledgeEngine: '知識引擎',
       Parser: '解析器',
+      Page: '擴展頁',
     },
     uploadLocal: '本地上傳',
     debugging: '調試中',
@@ -1264,6 +1275,10 @@ const zhHant = {
     notFoundDescription: '你訪問的頁面不存在或已被移動。',
     goBack: '返回上頁',
     backToHome: '返回首頁',
+  },
+  pluginPages: {
+    selectFromSidebar: '從側邊欄選擇一個插件頁面',
+    invalidPage: '無效的插件頁面',
   },
 };
 

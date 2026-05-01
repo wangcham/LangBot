@@ -1,6 +1,7 @@
 import {
   LLMModel,
   EmbeddingModel,
+  RerankModel,
   ModelProvider,
   ProviderScanDebugInfo,
   ScannedProviderModel,
@@ -8,15 +9,17 @@ import {
 
 export type ExtraArg = {
   key: string;
-  type: 'string' | 'number' | 'boolean';
+  type: 'string' | 'number' | 'boolean' | 'object';
+  // For 'object' type, value holds a JSON string that will be parsed on save.
   value: string;
 };
 
-export type ModelType = 'llm' | 'embedding';
+export type ModelType = 'llm' | 'embedding' | 'rerank';
 
 export interface ProviderModels {
   llm: LLMModel[];
   embedding: EmbeddingModel[];
+  rerank: RerankModel[];
 }
 
 export interface TestResult {

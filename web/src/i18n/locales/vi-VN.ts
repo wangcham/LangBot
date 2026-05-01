@@ -5,6 +5,9 @@ const viVN = {
     installedPlugins: 'Plugin đã cài đặt',
     pluginMarket: 'Chợ ứng dụng',
     mcpServers: 'Máy chủ MCP',
+    pluginPages: 'Trang plugin',
+    pluginPagesTooltip:
+      'Các trang trực quan được cung cấp bởi plugin đã cài đặt',
     quickStart: 'Bắt đầu nhanh',
   },
   common: {
@@ -200,6 +203,9 @@ const viVN = {
     string: 'Chuỗi',
     number: 'Số',
     boolean: 'Boolean',
+    object: 'Đối tượng',
+    objectJsonPlaceholder: '{ "type": "disabled" }',
+    invalidJsonObject: 'Giá trị phải là một đối tượng JSON hợp lệ',
     selectModelProvider: 'Chọn nhà cung cấp mô hình',
     modelProviderDescription:
       'Vui lòng điền tên mô hình do nhà cung cấp cung cấp',
@@ -276,6 +282,11 @@ const viVN = {
     loadError: 'Tải dữ liệu thất bại',
     chat: 'Trò chuyện',
     embedding: 'Embedding',
+    rerank: 'Sắp xếp lại',
+    rerankUrlTooltip:
+      'URL đầy đủ cho endpoint sắp xếp lại (vd: https://dashscope.aliyuncs.com/compatible-api/v1/reranks)',
+    rerankPathTooltip:
+      'Đường dẫn thêm vào URL cơ sở (mặc định: rerank, một số dịch vụ dùng reranks)',
     modelsCount: '{{count}} mô hình',
     expandModels: 'Mở rộng',
     collapseModels: 'Thu gọn',
@@ -501,6 +512,7 @@ const viVN = {
       Command: 'Lệnh',
       KnowledgeEngine: 'Công cụ tri thức',
       Parser: 'Trình phân tích',
+      Page: 'Trang',
     },
     uploadLocal: 'Tải lên cục bộ',
     debugging: 'Gỡ lỗi',
@@ -1324,6 +1336,10 @@ const viVN = {
       'Trang bạn tìm kiếm không tồn tại hoặc đã được di chuyển.',
     goBack: 'Quay lại',
     backToHome: 'Về trang chủ',
+  },
+  pluginPages: {
+    selectFromSidebar: 'Chọn một trang plugin từ thanh bên',
+    invalidPage: 'Trang plugin không hợp lệ',
   },
 };
 

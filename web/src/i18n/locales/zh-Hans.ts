@@ -5,6 +5,8 @@ const zhHans = {
     installedPlugins: '已安装插件',
     pluginMarket: '插件市场',
     mcpServers: 'MCP 服务器',
+    pluginPages: '插件页面',
+    pluginPagesTooltip: '由已安装的插件提供的可视化页面',
     quickStart: '快速开始向导',
   },
   common: {
@@ -191,6 +193,9 @@ const zhHans = {
     string: '字符串',
     number: '数字',
     boolean: '布尔值',
+    object: '对象',
+    objectJsonPlaceholder: '{ "type": "disabled" }',
+    invalidJsonObject: '值必须是有效的 JSON 对象',
     selectModelProvider: '选择模型供应商',
     modelProviderDescription: '请填写供应商向您提供的模型名称',
     modelManufacturer: '模型厂商',
@@ -261,6 +266,10 @@ const zhHans = {
     loadError: '加载数据失败',
     chat: '对话',
     embedding: '嵌入',
+    rerank: '重排序',
+    rerankUrlTooltip:
+      '重排序接口的完整 URL 覆盖（如 https://dashscope.aliyuncs.com/compatible-api/v1/reranks）',
+    rerankPathTooltip: '添加到基础 URL 后的重排序路径（默认：rerank）',
     modelsCount: '{{count}} 个模型',
     expandModels: '展开',
     collapseModels: '收起',
@@ -475,6 +484,7 @@ const zhHans = {
       Command: '命令',
       KnowledgeEngine: '知识引擎',
       Parser: '解析器',
+      Page: '页面',
     },
     uploadLocal: '本地上传',
     debugging: '调试中',
@@ -1344,6 +1354,10 @@ const zhHans = {
     notFoundDescription: '你访问的页面不存在或已被移动。',
     goBack: '返回上页',
     backToHome: '返回首页',
+  },
+  pluginPages: {
+    selectFromSidebar: '从侧边栏选择一个插件页面',
+    invalidPage: '无效的插件页面',
   },
 };
 

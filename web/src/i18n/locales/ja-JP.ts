@@ -5,6 +5,8 @@
     installedPlugins: 'インストール済みプラグイン',
     pluginMarket: 'プラグインマーケット',
     mcpServers: 'MCPサーバー',
+    pluginPages: 'プラグインページ',
+    pluginPagesTooltip: 'インストール済みプラグインが提供するビジュアルページ',
     quickStart: 'クイックスタート',
   },
   common: {
@@ -202,6 +204,9 @@
     string: '文字列',
     number: '数値',
     boolean: 'ブール値',
+    object: 'オブジェクト',
+    objectJsonPlaceholder: '{ "type": "disabled" }',
+    invalidJsonObject: '値は有効なJSONオブジェクトである必要があります',
     selectModelProvider: 'モデルプロバイダーを選択',
     modelProviderDescription: 'プロバイダーが提供するモデル名をご入力ください',
     modelManufacturer: 'モデルメーカー',
@@ -276,6 +281,11 @@
     loadError: 'データの読み込みに失敗しました',
     chat: 'チャット',
     embedding: '埋め込み',
+    rerank: '再順位付け',
+    rerankUrlTooltip:
+      '再順位付けエンドポイントの完全URL（例: https://dashscope.aliyuncs.com/compatible-api/v1/reranks）',
+    rerankPathTooltip:
+      'ベースURLに追加するパス（デフォルト: rerank、一部サービスはreranksを使用）',
     modelsCount: '{{count}} 個のモデル',
     expandModels: '展開',
     collapseModels: '折りたたむ',
@@ -501,6 +511,7 @@
       Command: 'コマンド',
       KnowledgeEngine: '知識エンジン',
       Parser: 'パーサー',
+      Page: 'ページ',
     },
     uploadLocal: 'ローカルアップロード',
     debugging: 'デバッグ中',
@@ -1331,6 +1342,10 @@
       'お探しのページは存在しないか、移動された可能性があります。',
     goBack: '戻る',
     backToHome: 'ホームに戻る',
+  },
+  pluginPages: {
+    selectFromSidebar: 'サイドバーからプラグインページを選択してください',
+    invalidPage: '無効なプラグインページ',
   },
 };
 

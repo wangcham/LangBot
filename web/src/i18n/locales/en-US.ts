@@ -5,6 +5,8 @@ const enUS = {
     installedPlugins: 'Installed Plugins',
     pluginMarket: 'Marketplace',
     mcpServers: 'MCP Servers',
+    pluginPages: 'Plugin Pages',
+    pluginPagesTooltip: 'Visual pages provided by installed plugins',
     quickStart: 'Quick Start',
   },
   common: {
@@ -199,6 +201,9 @@ const enUS = {
     string: 'String',
     number: 'Number',
     boolean: 'Boolean',
+    object: 'Object',
+    objectJsonPlaceholder: '{ "type": "disabled" }',
+    invalidJsonObject: 'Value must be a valid JSON object',
     selectModelProvider: 'Select Model Provider',
     modelProviderDescription:
       'Please fill in the model name provided by the provider',
@@ -272,6 +277,10 @@ const enUS = {
     loadError: 'Failed to load data',
     chat: 'Chat',
     embedding: 'Embedding',
+    rerank: 'Rerank',
+    rerankUrlTooltip:
+      'Full URL override for rerank endpoint (e.g. https://dashscope.aliyuncs.com/compatible-api/v1/reranks)',
+    rerankPathTooltip: 'Path appended to base URL (default: rerank)',
     modelsCount: '{{count}} model(s)',
     expandModels: 'Expand',
     collapseModels: 'Collapse',
@@ -498,6 +507,7 @@ const enUS = {
       Command: 'Command',
       KnowledgeEngine: 'Knowledge Engine',
       Parser: 'Parser',
+      Page: 'Page',
     },
     uploadLocal: 'Upload Local',
     debugging: 'Debugging',
@@ -1407,6 +1417,10 @@ const enUS = {
       'The page you are looking for does not exist or has been moved.',
     goBack: 'Go Back',
     backToHome: 'Back to Home',
+  },
+  pluginPages: {
+    selectFromSidebar: 'Select a plugin page from the sidebar',
+    invalidPage: 'Invalid plugin page',
   },
 };
 

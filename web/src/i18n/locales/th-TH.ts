@@ -5,6 +5,8 @@ const thTH = {
     installedPlugins: 'ปลั๊กอินที่ติดตั้ง',
     pluginMarket: 'ตลาดปลั๊กอิน',
     mcpServers: 'เซิร์ฟเวอร์ MCP',
+    pluginPages: 'หน้าปลั๊กอิน',
+    pluginPagesTooltip: 'หน้าเว็บที่จัดทำโดยปลั๊กอินที่ติดตั้ง',
     quickStart: 'เริ่มต้นอย่างรวดเร็ว',
   },
   common: {
@@ -197,6 +199,9 @@ const thTH = {
     string: 'สตริง',
     number: 'ตัวเลข',
     boolean: 'บูลีน',
+    object: 'อ็อบเจกต์',
+    objectJsonPlaceholder: '{ "type": "disabled" }',
+    invalidJsonObject: 'ค่าต้องเป็นอ็อบเจกต์ JSON ที่ถูกต้อง',
     selectModelProvider: 'เลือกผู้ให้บริการโมเดล',
     modelProviderDescription: 'กรุณากรอกชื่อโมเดลที่ผู้ให้บริการจัดเตรียมไว้',
     modelManufacturer: 'ผู้ผลิตโมเดล',
@@ -268,6 +273,11 @@ const thTH = {
     loadError: 'โหลดข้อมูลล้มเหลว',
     chat: 'แชท',
     embedding: 'Embedding',
+    rerank: 'จัดลำดับใหม่',
+    rerankUrlTooltip:
+      'URL เต็มสำหรับ endpoint จัดลำดับใหม่ (เช่น: https://dashscope.aliyuncs.com/compatible-api/v1/reranks)',
+    rerankPathTooltip:
+      'พาธที่เพิ่มเข้าไปใน URL ฐาน (ค่าเริ่มต้น: rerank บางบริการใช้ reranks)',
     modelsCount: '{{count}} โมเดล',
     expandModels: 'ขยาย',
     collapseModels: 'ย่อ',
@@ -491,6 +501,7 @@ const thTH = {
       Command: 'คำสั่ง',
       KnowledgeEngine: 'เครื่องมือความรู้',
       Parser: 'ตัวแยกวิเคราะห์',
+      Page: 'หน้า',
     },
     uploadLocal: 'อัปโหลดจากเครื่อง',
     debugging: 'ดีบัก',
@@ -1302,6 +1313,10 @@ const thTH = {
     notFoundDescription: 'หน้าที่คุณกำลังมองหาไม่มีอยู่หรือถูกย้ายแล้ว',
     goBack: 'ย้อนกลับ',
     backToHome: 'กลับหน้าหลัก',
+  },
+  pluginPages: {
+    selectFromSidebar: 'เลือกหน้าปลั๊กอินจากแถบด้านข้าง',
+    invalidPage: 'หน้าปลั๊กอินไม่ถูกต้อง',
   },
 };
 

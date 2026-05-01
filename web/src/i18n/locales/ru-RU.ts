@@ -5,6 +5,9 @@ const ruRU = {
     installedPlugins: 'Установленные плагины',
     pluginMarket: 'Маркетплейс',
     mcpServers: 'MCP-серверы',
+    pluginPages: 'Страницы плагинов',
+    pluginPagesTooltip:
+      'Визуальные страницы, предоставляемые установленными плагинами',
     quickStart: 'Быстрый старт',
   },
   common: {
@@ -199,6 +202,9 @@ const ruRU = {
     string: 'Строка',
     number: 'Число',
     boolean: 'Логический',
+    object: 'Объект',
+    objectJsonPlaceholder: '{ "type": "disabled" }',
+    invalidJsonObject: 'Значение должно быть допустимым объектом JSON',
     selectModelProvider: 'Выберите провайдера модели',
     modelProviderDescription:
       'Пожалуйста, введите название модели, предоставленное провайдером',
@@ -278,6 +284,11 @@ const ruRU = {
     loadError: 'Не удалось загрузить данные',
     chat: 'Чат',
     embedding: 'Embedding',
+    rerank: 'Переранжирование',
+    rerankUrlTooltip:
+      'Полный URL для эндпоинта переранжирования (напр.: https://dashscope.aliyuncs.com/compatible-api/v1/reranks)',
+    rerankPathTooltip:
+      'Путь, добавляемый к базовому URL (по умолчанию: rerank, некоторые сервисы используют reranks)',
     modelsCount: '{{count}} модель(ей)',
     expandModels: 'Развернуть',
     collapseModels: 'Свернуть',
@@ -505,6 +516,7 @@ const ruRU = {
       Command: 'Команда',
       KnowledgeEngine: 'Движок знаний',
       Parser: 'Парсер',
+      Page: 'Страница',
     },
     uploadLocal: 'Загрузить локально',
     debugging: 'Отладка',
@@ -1322,6 +1334,10 @@ const ruRU = {
         'Ваш бот создан и подключён к конвейеру ИИ. Теперь вы можете управлять им из рабочей панели.',
       backToWorkbench: 'Вернуться к рабочей панели',
     },
+  },
+  pluginPages: {
+    selectFromSidebar: 'Выберите страницу плагина на боковой панели',
+    invalidPage: 'Недопустимая страница плагина',
   },
 };
 

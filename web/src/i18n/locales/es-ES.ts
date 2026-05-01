@@ -5,6 +5,9 @@ const esES = {
     installedPlugins: 'Plugins instalados',
     pluginMarket: 'Tienda',
     mcpServers: 'Servidores MCP',
+    pluginPages: 'Páginas de plugins',
+    pluginPagesTooltip:
+      'Páginas visuales proporcionadas por los plugins instalados',
     quickStart: 'Inicio rápido',
   },
   common: {
@@ -203,6 +206,9 @@ const esES = {
     string: 'Cadena',
     number: 'Número',
     boolean: 'Booleano',
+    object: 'Objeto',
+    objectJsonPlaceholder: '{ "type": "disabled" }',
+    invalidJsonObject: 'El valor debe ser un objeto JSON válido',
     selectModelProvider: 'Seleccionar proveedor del modelo',
     modelProviderDescription:
       'Por favor, introduce el nombre del modelo proporcionado por el proveedor',
@@ -282,6 +288,11 @@ const esES = {
     loadError: 'Error al cargar datos',
     chat: 'Chat',
     embedding: 'Embedding',
+    rerank: 'Reordenar',
+    rerankUrlTooltip:
+      'URL completa para el endpoint de reordenación (ej: https://dashscope.aliyuncs.com/compatible-api/v1/reranks)',
+    rerankPathTooltip:
+      'Ruta añadida a la URL base (predeterminado: rerank, algunos servicios usan reranks)',
     modelsCount: '{{count}} modelo(s)',
     expandModels: 'Expandir',
     collapseModels: 'Contraer',
@@ -509,6 +520,7 @@ const esES = {
       Command: 'Comando',
       KnowledgeEngine: 'Motor de conocimiento',
       Parser: 'Analizador',
+      Page: 'Página',
     },
     uploadLocal: 'Subir local',
     debugging: 'Depuración',
@@ -1360,6 +1372,10 @@ const esES = {
     notFoundDescription: 'La página que buscas no existe o ha sido movida.',
     goBack: 'Volver',
     backToHome: 'Ir al inicio',
+  },
+  pluginPages: {
+    selectFromSidebar: 'Selecciona una página de plugin en la barra lateral',
+    invalidPage: 'Página de plugin no válida',
   },
 };
 

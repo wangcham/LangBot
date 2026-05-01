@@ -22,6 +22,7 @@ import MarketPage from '@/app/home/market/page';
 import MCPPage from '@/app/home/mcp/page';
 import KnowledgePage from '@/app/home/knowledge/page';
 import SkillsPage from '@/app/home/skills/page';
+import PluginPagesPage from '@/app/home/plugin-pages/page';
 import ErrorPage from '@/components/ErrorPage';
 
 const Loading = () => <div>Loading...</div>;
@@ -157,5 +158,15 @@ export const router = createBrowserRouter([
         ),
       },
     ],
+  },
+  {
+    path: '/home/plugin-pages',
+    element: (
+      <Suspense fallback={<Loading />}>
+        <HomeLayout>
+          <PluginPagesPage />
+        </HomeLayout>
+      </Suspense>
+    ),
   },
 ]);

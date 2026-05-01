@@ -38,7 +38,8 @@
     },
     "ai": {
         "runner": {
-            "runner": "local-agent"
+            "runner": "local-agent",
+            "expire-time": 0
         },
         "local-agent": {
             "model": {
@@ -53,7 +54,9 @@
                 }
             ],
             "knowledge-bases": [],
-            "box-session-id-template": "{launcher_type}_{launcher_id}"
+            "box-session-id-template": "{launcher_type}_{launcher_id}",
+            "rerank-model": "",
+            "rerank-top-k": 5
         },
         "dify-service-api": {
             "base-url": "https://api.dify.ai/v1",
